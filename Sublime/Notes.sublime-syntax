@@ -1,0 +1,27 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/syntax.html
+name: Notes
+file_extensions:
+  - notes
+scope: text.plain
+contexts:
+  main: 
+    - match: \[
+      push: important
+    - match: \#.*$
+      scope: constant.numeric.notes.tag
+    - match: ^-
+      push: list
+
+  list:
+    - meta_scope: variable.function.notes.list.item
+      scope: list.item
+    - match: $
+      pop: true
+
+  important:
+    - meta_scope: constant.language.notes.important.item
+      scope: important.item
+    - match: \]
+      pop: true 
